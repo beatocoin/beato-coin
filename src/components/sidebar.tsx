@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { createClient } from "@/utils/supabase/client"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { Home, LayoutDashboard, Settings, Sliders, CreditCard, PlusCircle, Package, Upload, Tags, Key, DollarSign, Users, ChevronLeft, ChevronRight, Cpu, ChevronDown, UserCircle, Wallet, ShoppingCart } from "lucide-react"
+import { Home, LayoutDashboard, Settings, Sliders, CreditCard, PlusCircle, Package, Upload, Tags, Key, DollarSign, Users, ChevronLeft, ChevronRight, Cpu, ChevronDown, UserCircle, Wallet, ShoppingCart, ShoppingBag } from "lucide-react"
 import { useTheme } from "@/contexts/ThemeContext"
 import { useSidebar } from "@/contexts/SidebarContext"
 import Link from "next/link"
@@ -26,6 +26,11 @@ export function Sidebar() {
   const supabase = createClient()
   const { colors, tableExists } = useTheme()
   const { isCollapsed, setIsCollapsed } = useSidebar()
+
+  // Debug: Log when isCollapsed changes
+  useEffect(() => {
+    console.log('Sidebar isCollapsed state changed to:', isCollapsed);
+  }, [isCollapsed]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -97,12 +102,7 @@ export function Sidebar() {
       icon: Home
     },
     {
-      href: "/pricing",
-      title: pricingLinkText,
-      icon: Tags
-    },
-    {
-      href: "/agents",
+      href: "/agent?agent_id=993c5e39-7d9a-42d5-ba05-00132c0df14d",
       title: agentsLinkText,
       icon: Cpu
     },
@@ -116,97 +116,32 @@ export function Sidebar() {
       title: "Buy Beato Coin",
       icon: ShoppingCart
     },
-    // Show Website Setup at the top level
-    ...(
-      !tableExists
-        ? [{
-            href: "/website-setup",
-            title: "Website Setup",
-            icon: Settings,
-            highlight: true
-          }]
-        : (isAdmin
-            ? [{
-                href: "/website-setup",
-                title: "Website Setup",
-                icon: Settings
-              }]
-            : [])
-      ),
     ...(isLoggedIn ? [{
-      href: "/dashboard",
-      title: "Dashboard",
-      icon: LayoutDashboard
-    },
-    {
-      href: "/user-settings",
-      title: "User Settings",
-      icon: Settings
-    },
-    {
-      href: "/affiliate-dashboard",
-      title: "Affiliate Program",
-      icon: DollarSign
-    },
-    {
-      href: "/billing",
-      title: "Billing",
-      icon: CreditCard
+      href: "/redeem-token",
+      title: "Redeem Beato Coin",
+      icon: ShoppingCart
     }] : []),
+    {
+      href: "https://www.aquabeato.shop/",
+      title: "Shop",
+      icon: ShoppingBag,
+      target: "_blank"
+    },
     // Show admin-only menu items if user is admin
     ...(isAdmin ? [
       {
         href: "/admin-settings",
         title: "Website Settings",
         icon: Sliders
-      },
-      {
-        type: "submenu",
-        title: "My Agents",
-        icon: Cpu,
-        items: [
-          {
-            href: "/my-agents",
-            title: "My Agents",
-            icon: UserCircle
-          },
-          {
-            href: "/create-agent",
-            title: "Create Agent",
-            icon: PlusCircle
-          }
-        ]
-      },
-      ...(hasValidStripeConfig ? [
-        {
-          type: "submenu",
-          title: "Subscriptions",
-          icon: CreditCard,
-          items: [
-            {
-              href: "/subscriptions",
-              title: "View All",
-              icon: CreditCard
-            },
-            {
-              href: "/products",
-              title: "Products",
-              icon: Package
-            },
-            {
-              href: "/create-product-stripe",
-              title: "Create Product",
-              icon: PlusCircle
-            },
-            {
-              href: "/affiliate-transactions",
-              title: "Affiliate Manager",
-              icon: Users
-            }
-          ]
-        }
-      ] : []),
+      }
     ] : []),
+    // Contact Us link at the bottom
+    {
+      href: "https://www.aquabeato.shop/contact-us/",
+      title: "Contact Us",
+      icon: Settings,
+      target: "_blank"
+    },
   ]
 
   const renderMenuItem = (item: any) => {
@@ -272,6 +207,7 @@ export function Sidebar() {
       <LinkComponent
         key={item.href}
         href={item.href}
+        target={item.target || undefined}
         onClick={() => {
           // Close sidebar on mobile when link is clicked
           if (window.innerWidth < 768 && !isCollapsed) {
@@ -308,6 +244,7 @@ export function Sidebar() {
         <button
           onClick={() => {
             const newState = !isCollapsed;
+            console.log('Sidebar toggle clicked. Current state:', isCollapsed, 'New state:', newState);
             setIsCollapsed(newState);
             // Save user preference
             localStorage.setItem('sidebarCollapsed', newState.toString());

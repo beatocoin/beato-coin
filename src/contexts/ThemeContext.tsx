@@ -21,11 +21,11 @@ interface ThemeContextType {
 }
 
 const defaultColors: ThemeColors = {
-  primary: '#5EB1BF',
+  primary: '#005b80',
   secondary: '#F8FDFF',
   dark: '#233D4D',
-  accent1: '#E07A5F',
-  accent2: '#FCB97D',
+  accent1: '#00a4e6',
+  accent2: '#f2a700',
   header: '#FFFFFF',
   pageBackground: '#F8FDFF'
 }
@@ -72,10 +72,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           // Still use default colors in case of error
           setColors(defaultColors)
         } else if (data?.theme_colors) {
-          console.log('Theme colors loaded successfully')
+          console.log('Theme colors loaded successfully:', data.theme_colors)
           setColors(data.theme_colors)
         } else {
-          console.log('No theme_colors found in website_settings, using default')
+          console.log('No theme_colors found in website_settings, using default:', defaultColors)
           // No theme colors found, use default
           setColors(defaultColors)
         }
@@ -94,17 +94,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Update CSS variables when colors change
+    console.log('Setting CSS variables with colors:', colors)
     const root = document.documentElement
     Object.entries(colors).forEach(([key, value]) => {
       root.style.setProperty(`--color-${key}`, value)
+      console.log(`Set --color-${key}: ${value}`)
     })
 
     // Apply header and page background colors directly
     const header = document.querySelector('header')
     if (header) {
       header.style.backgroundColor = colors.header
+      console.log('Set header background:', colors.header)
     }
     document.body.style.backgroundColor = colors.pageBackground
+    console.log('Set body background:', colors.pageBackground)
   }, [colors])
 
   if (isLoading) {

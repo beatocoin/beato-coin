@@ -6,17 +6,10 @@ import { Header } from "@/components/header";
 import { Sidebar } from "@/components/sidebar";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { WalletProviderContextProvider } from "@app/contexts/WalletProviderContext";
-import { createContext, useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { SidebarContext } from "@/contexts/SidebarContext";
 
 const inter = Inter({ subsets: ["latin"] });
-
-// Create a context for sidebar state
-export const SidebarContext = createContext({
-  isCollapsed: false,
-  setIsCollapsed: (value: boolean) => {}
-});
-
-export const useSidebar = () => useContext(SidebarContext);
 
 export default function RootLayout({
   children,

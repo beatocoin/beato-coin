@@ -21,11 +21,11 @@ interface ThemeContextType {
 }
 
 const defaultColors: ThemeColors = {
-  primary: '#5EB1BF',
+  primary: '#005b80',
   secondary: '#F8FDFF',
   dark: '#233D4D',
-  accent1: '#E07A5F',
-  accent2: '#FCB97D',
+  accent1: '#00a4e6',
+  accent2: '#f2a700',
   header: '#FFFFFF',
   pageBackground: '#F8FDFF'
 }

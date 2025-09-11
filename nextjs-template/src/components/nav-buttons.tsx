@@ -46,9 +46,9 @@ export function NavButtons() {
         <>
           <Button 
             className="bg-[var(--color-accent1)] text-white hover:bg-white hover:text-[var(--color-accent1)] hover:border-[var(--color-accent1)] border transition-all duration-200 w-32 rounded-lg focus:ring-2 focus:ring-[var(--color-accent1)] focus:outline-none"
-            onClick={() => userId && (window.location.href = `/dashboard?UID=${userId}`)}
+            onClick={() => window.location.href = '/wallet'}
           >
-            Dashboard
+            Wallet
           </Button>
           <Button 
             className="bg-[var(--color-accent2)] text-white hover:bg-white hover:text-[var(--color-accent2)] hover:border-[var(--color-accent2)] border transition-all duration-200 w-32 rounded-lg focus:ring-2 focus:ring-[var(--color-accent2)] focus:outline-none" 

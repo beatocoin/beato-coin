@@ -29,9 +29,11 @@ interface FeatureProps {
 }
 
 const Feature = ({ icon, title, description, className = "" }: FeatureProps) => {
+  const { colors } = useTheme();
+  
   return (
     <div className={`bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-200 ${className} p-[25px]`}>
-      <div className="text-[#36A486] mb-4">
+      <div className="mb-4" style={{ color: colors.primary }}>
         {icon}
       </div>
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
@@ -42,9 +44,11 @@ const Feature = ({ icon, title, description, className = "" }: FeatureProps) => 
 
 // Placeholder for RemainingSpots component
 const RemainingSpots = () => {
+  const { colors } = useTheme();
+  
   return (
-    <div className="bg-green-100 px-6 py-2 rounded-full">
-      <span className="text-green-600 font-semibold">76 spots remaining</span>
+    <div className="px-6 py-2 rounded-full" style={{ backgroundColor: `${colors.accent1}20` }}>
+      <span className="font-semibold" style={{ color: colors.accent1 }}>76 spots remaining</span>
     </div>
   );
 };
@@ -54,6 +58,11 @@ export default function Home() {
   const supabase = createClient();
   const { colors } = useTheme();
   const [presaleEndDate, setPresaleEndDate] = useState<Date | null>(null);
+
+  // Debug: Log theme colors
+  useEffect(() => {
+    console.log('Home page theme colors:', colors);
+  }, [colors]);
 
   const handleRegister = async () => {
     await supabase.auth.signInWithOAuth({
@@ -222,7 +231,7 @@ export default function Home() {
         <div className="w-full" style={{ maxWidth: '95%', margin: 'auto' }}>
           <div className="grid md:grid-cols-3 gap-8">
             {/* Block 1 */}
-            <div className="bg-[#fafafa] rounded-2xl shadow-lg py-6 px-[25px] flex flex-col items-center border border-[#d8d8d8]">
+            <div className="bg-white rounded-2xl shadow-lg py-6 px-[25px] flex flex-col items-center border border-gray-200">
               <div className="rounded-full w-16 h-16 flex items-center justify-center mb-4" style={{ backgroundColor: colors.accent1 }}>
                 <span className="text-2xl font-bold text-white">1</span>
               </div>
@@ -235,7 +244,7 @@ export default function Home() {
               </Link>
             </div>
             {/* Block 2 */}
-            <div className="bg-[#fafafa] rounded-2xl shadow-lg py-6 px-[25px] flex flex-col items-center border border-[#d8d8d8]">
+            <div className="bg-white rounded-2xl shadow-lg py-6 px-[25px] flex flex-col items-center border border-gray-200">
               <div className="rounded-full w-16 h-16 flex items-center justify-center mb-4" style={{ backgroundColor: colors.accent2 }}>
                 <span className="text-2xl font-bold text-white">2</span>
               </div>
@@ -248,7 +257,7 @@ export default function Home() {
               </Link>
             </div>
             {/* Block 3 */}
-            <div className="bg-[#fafafa] rounded-2xl shadow-lg py-6 px-[25px] flex flex-col items-center border border-[#d8d8d8]">
+            <div className="bg-white rounded-2xl shadow-lg py-6 px-[25px] flex flex-col items-center border border-gray-200">
               <div className="rounded-full w-16 h-16 flex items-center justify-center mb-4" style={{ backgroundColor: colors.primary }}>
                 <span className="text-2xl font-bold text-white">3</span>
               </div>
@@ -269,7 +278,7 @@ export default function Home() {
         <div className="w-full" style={{ maxWidth: '95%', margin: 'auto' }}>
           <div className="grid md:grid-cols-3 gap-8">
             {/* First Block */}
-            <div className="bg-[#fafafa] rounded-2xl shadow-lg py-6 px-[25px]">
+            <div className="bg-white rounded-2xl shadow-lg py-6 px-[25px]">
               <div className="flex justify-center mb-2">
                 <ShieldCheckIcon className="w-14 h-14" style={{ color: colors.accent1 }} />
               </div>
@@ -287,7 +296,7 @@ export default function Home() {
             </div>
 
             {/* Second Block */}
-            <div className="bg-[#fafafa] rounded-2xl shadow-lg py-6 px-[25px]">
+            <div className="bg-white rounded-2xl shadow-lg py-6 px-[25px]">
               <div className="flex justify-center mb-2">
                 <ChartBarIcon className="w-14 h-14" style={{ color: colors.primary }} />
               </div>
@@ -305,7 +314,7 @@ export default function Home() {
             </div>
 
             {/* Third Block: Environmental Benefits */}
-            <div className="bg-[#fafafa] rounded-2xl shadow-lg py-6 px-[25px]">
+            <div className="bg-white rounded-2xl shadow-lg py-6 px-[25px]">
               <div className="flex justify-center mb-2">
                 <ArrowsRightLeftIcon className="w-14 h-14" style={{ color: colors.dark }} />
               </div>

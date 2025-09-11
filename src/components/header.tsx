@@ -5,6 +5,7 @@ import { MobileMenu } from "@/components/mobile-menu"
 import { useEffect, useState } from "react"
 import { getSiteName, DEFAULT_SITE_NAME, subscribeToSiteNameChanges } from "@/utils/site-name"
 import Loading from "@/components/ui/loading"
+import Image from "next/image"
 
 export function Header() {
   const [siteName, setSiteName] = useState<string | null>(null)
@@ -34,9 +35,15 @@ export function Header() {
 
   return (
     <header className="w-full border-b bg-white/80 backdrop-blur-md shadow-sm">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <div className="text-xl font-bold text-[var(--color-dark)]">
-          {isLoading ? <Loading size="sm" text="" /> : siteName}
+      <div className="container mx-auto px-4 h-24 flex items-center justify-between">
+        <div className="flex items-center">
+          <Image 
+            src="/logo.png" 
+            alt="Beato Coin" 
+            width={160} 
+            height={60} 
+            className="h-16 w-auto"
+          />
         </div>
         <nav className="hidden md:flex gap-14 items-center text-base font-semibold">
           <NavButtons />
