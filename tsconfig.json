@@ -1,0 +1,64 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./nextjs-template/src/*"],
+      "@/components/*": ["./nextjs-template/src/components/*"],
+      "@/utils/*": ["./nextjs-template/src/utils/*"],
+      "@/contexts/*": ["./nextjs-template/src/contexts/*"],
+      "@/lib/*": ["./nextjs-template/src/lib/*"],
+      "@/app/*": ["./nextjs-template/src/app/*"],
+      "@/hooks/*": ["./nextjs-template/src/hooks/*"],
+      
+      "@submodule/*": ["./nextjs-template/src/*"],
+      "@submodule/components/*": ["./nextjs-template/src/components/*"],
+      "@submodule/utils/*": ["./nextjs-template/src/utils/*"],
+      "@submodule/contexts/*": ["./nextjs-template/src/contexts/*"],
+      "@submodule/lib/*": ["./nextjs-template/src/lib/*"],
+      "@submodule/app/*": ["./nextjs-template/src/app/*"],
+      "@submodule/hooks/*": ["./nextjs-template/src/hooks/*"],
+      "@submodule/middleware/*": ["./nextjs-template/src/middleware/*"],
+      
+      "@app/*": ["./src/*"],
+      "@app/components/*": ["./src/components/*"],
+      "@app/utils/*": ["./src/utils/*"],
+      "@app/contexts/*": ["./src/contexts/*"],
+      "@app/lib/*": ["./src/lib/*"],
+      "@app/app/*": ["./src/app/*"],
+      "@app/hooks/*": ["./src/hooks/*"],
+      "@app/config/*": ["./src/config/*"]
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./nextjs-template/src/types",
+      "./src/types"
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "nextjs-template/src/**/*.ts",
+    "nextjs-template/src/**/*.tsx"
+  ],
+  "exclude": ["node_modules"]
+}

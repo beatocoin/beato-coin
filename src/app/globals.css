@@ -1,0 +1,538 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #5EB1BF;
+    --color-secondary: #F8FDFF;
+    --color-dark: #233D4D;
+    --color-accent1: #E07A5F;
+    --color-accent2: #FCB97D;
+
+    --background: var(--color-secondary);
+    --foreground: var(--color-dark);
+
+    --card: var(--color-secondary);
+    --card-foreground: var(--color-dark);
+ 
+    --popover: var(--color-secondary);
+    --popover-foreground: var(--color-dark);
+ 
+    --primary: var(--color-primary);
+    --primary-foreground: var(--color-secondary);
+ 
+    --secondary: var(--color-dark);
+    --secondary-foreground: var(--color-secondary);
+ 
+    --muted: color-mix(in srgb, var(--color-dark) 10%, var(--color-secondary));
+    --muted-foreground: color-mix(in srgb, var(--color-dark) 60%, var(--color-secondary));
+ 
+    --accent: var(--color-accent1);
+    --accent-foreground: var(--color-secondary);
+ 
+    --destructive: #ff0000;
+    --destructive-foreground: var(--color-secondary);
+
+    --border: color-mix(in srgb, var(--color-dark) 20%, var(--color-secondary));
+    --input: color-mix(in srgb, var(--color-dark) 20%, var(--color-secondary));
+    --ring: var(--color-primary);
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  /* Make sure all buttons use the correct colors */
+  .btn-primary, 
+  .bg-primary {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  /* Ensure text colors are consistent */
+  .text-primary {
+    color: var(--primary);
+  }
+  .text-foreground {
+    color: var(--foreground);
+  }
+  .border-primary {
+    border-color: var(--primary);
+  }
+}
+
+/* Custom padding overrides */
+@layer utilities {
+  .py-8 {
+    padding-top: 1rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .px-4 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  @media (min-width: 768px) {
+    .px-4 {
+      padding-left: 2.5rem !important;
+      padding-right: 2.5rem !important;
+    }
+  }
+  
+  /* Remove border from agent form grid */
+  .grid.grid-cols-2.gap-6.mb-6.bg-gray-50\/50.p-6.rounded-xl.border.border-gray-100.shadow-sm {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    max-width: 400px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 0px !important;
+  }
+  
+  /* Remove top margin from textarea container */
+  form .relative.max-w-\[750px\].w-full {
+    margin-top: 0px !important;
+  }
+  
+  /* Dashboard account information table layout */
+  .grid.grid-cols-3.gap-4 {
+    display: grid !important;
+    grid-template-columns: 40% 59% !important;
+    gap: 1% !important;
+  }
+  
+  .grid.grid-cols-3.gap-4 .col-span-2 {
+    grid-column: 2 / 3 !important;
+    padding-left: 5px !important;
+  }
+  
+  /* Scope the dashboard layout to the dashboard page only */
+  .dashboard-page .grid.grid-cols-3.gap-4 {
+    display: grid !important;
+    grid-template-columns: 40% 59% !important;
+    gap: 1% !important;
+  }
+  
+  .dashboard-page .grid.grid-cols-3.gap-4 .col-span-2 {
+    grid-column: 2 / 3 !important;
+    padding-left: 5px !important;
+  }
+  
+  /* Video statistics grid layout for YouTube API responses */
+  .video-stats-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  /* Styling for YouTube video embed wrapper */
+  .video-embed-wrapper {
+    padding: 5px;
+    background: white;
+    border: 1px solid #d8d8d8;
+    margin: 10px auto;
+    display: block;
+    width: 570px !important;
+    max-width: 100% !important;
+  }
+  
+  /* Mobile specific styles for API response container */
+  @media (max-width: 767px) {
+    .data-display-container {
+      padding-left: 0rem !important;
+      padding-right: 0rem !important;
+      padding-top: 0rem !important;
+      padding-bottom: 0rem !important;
+    }
+    
+    /* Agent message bubble styling on mobile */
+    .rounded-2xl.px-6.py-2.shadow-sm.w-full.sm\:w-auto.bg-gray-50.border.border-\[\#d8d8d8\].sm\:max-w-\[85\%\] {
+      width: 95% !important;
+      padding-left: 0rem !important;
+      padding-right: 0rem !important;
+      padding-top: 0rem !important;
+      padding-bottom: 0rem !important;
+    }
+    
+    /* Override p-6 padding on agent page */
+    .p-6 {
+      padding: 0.5rem !important;
+    }
+    
+    /* Fix YouTube video embed dimensions on mobile */
+    .embed-container {
+      padding-bottom: 0 !important; /* Remove aspect ratio padding */
+      height: 260px !important; /* Fixed height on mobile */
+    }
+    
+    .embed-container iframe,
+    .data-display-container iframe,
+    .rounded-2xl.px-6.py-2.shadow-sm.w-full.sm\:w-auto.bg-gray-50.border.border-\[\#d8d8d8\].sm\:max-w-\[85\%\] iframe {
+      position: block !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 260px !important;
+    }
+    
+    /* Ensure all iframes have correct dimensions on mobile in agent chat */
+    iframe[src*="youtube.com"] {
+      width: 100% !important;
+      height: 260px !important;
+    }
+    
+    /* Make video title smaller on mobile */
+    .data-display-container h2.text-xl.font-bold {
+      font-size: 1rem !important;
+    }
+    
+    /* Update video stats grid on mobile */
+    .video-stats-grid {
+      gap: 0.25rem !important;
+    }
+    
+    .video-stats-grid > div {
+      border: 1px solid #d8d8d8 !important;
+    }
+    
+    /* Make statistics labels bold and use theme dark color */
+    .video-stats-grid p.text-sm.font-medium.text-gray-500 {
+      font-weight: bold !important;
+      color: var(--color-dark) !important;
+    }
+    
+    /* Remove top and bottom margin from images on mobile */
+    .data-display-container img {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+    
+    /* Error message styling for mobile */
+    .data-display-container.bg-red-50 {
+      margin: 0 !important;
+      border-radius: 0 !important;
+    }
+    
+    /* My Agents table column widths */
+    /* DELETED: .overflow-x-auto table th/td forced widths for columns 1, 2, 3 */
+    /*
+    .overflow-x-auto table th:nth-child(1),
+    .overflow-x-auto table td:nth-child(1) {
+      width: 25% !important;
+    }
+    .overflow-x-auto table th:nth-child(2),
+    .overflow-x-auto table td:nth-child(2) {
+      width: 25% !important;
+      font-size: 0.9rem !important;
+    }
+    .overflow-x-auto table th:nth-child(3),
+    .overflow-x-auto table td:nth-child(3) {
+      width: 25% !important;
+      font-size: 0.9rem !important;
+    }
+    */
+    .overflow-x-auto table th:nth-child(4),
+    .overflow-x-auto table td:nth-child(4) {
+      width: 10% !important;
+    }
+    .overflow-x-auto table th:nth-child(5),
+    .overflow-x-auto table td:nth-child(5) {
+      width: 15% !important;
+    }
+    
+    /* Custom billing filter text size for mobile */
+    @media (max-width: 767px) {
+      .pricing-page .inline-flex.items-center.rounded-full.border button {
+        font-size: 0.675rem !important;
+      }
+      
+      /* Agents page description font size for mobile */
+      .agents-page-description {
+        font-size: 0.9rem !important;
+      }
+      
+      /* Agent card description text size for mobile */
+      p.text-muted-foreground.mb-6 {
+        font-size: 0.9rem !important;
+        line-height: 1.25rem !important;
+      }
+      
+      /* Dashboard account info text size for mobile */
+      .grid.grid-cols-3.gap-4 > div {
+        font-size: 0.9rem !important;
+      }
+      
+      /* Stack website input fields on mobile */
+      .space-y-4.p-4.rounded-md .grid.grid-cols-2 {
+        grid-template-columns: 1fr !important;
+      }
+      
+      /* Hide Description column in My Agents table on mobile */
+      .overflow-x-auto table th:nth-child(2),
+      .overflow-x-auto table td:nth-child(2) {
+        display: none !important;
+      }
+      
+      /* Adjust API keys mobile layout */
+      .flex.flex-col.md\:flex-row.md\:items-center .w-full.mb-4.md\:mb-0 {
+        margin-bottom: 0.5rem !important;
+      }
+      
+      /* Agent page chat history button position for mobile */
+      .container.relative .absolute.top-4.right-4 {
+        position: fixed !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: 1rem !important;
+        left: 70px !important;
+      }
+      
+      /* Headline size for mobile */
+      h1 {
+        font-size: 1.5rem !important;
+      }
+      
+      /* Agent description styling for mobile */
+      .flex-col.items-center .max-w-\[1200px\] > p.text-lg.text-center.text-gray-600 {
+        font-size: 0.9rem !important;
+        line-height: 1.25rem !important;
+        text-align: left !important;
+        padding: 0 0.5rem !important;
+      }
+      
+      /* Affiliate dashboard description text */
+      .container.mx-auto.px-4.py-8 .text-lg,
+      .container.mx-auto.px-4.py-8 .text-muted-foreground.mb-4,
+      .container.mx-auto.px-4.py-8 p.text-lg,
+      .container.mx-auto.px-4.py-8 .space-y-2 p,
+      .container.mx-auto.px-4.py-8 .space-y-4 p {
+        font-size: 0.9rem !important;
+        line-height: 1.25rem !important;
+      }
+      
+      /* Make textarea taller on mobile */
+      .relative.max-w-\[750px\].w-full textarea {
+        min-height: 150px !important;
+      }
+      
+      /* Hide "Enter to send" toggle on mobile */
+      .absolute.bottom-4.right-4 .flex.items-center.space-x-2.bg-white\/80 {
+        display: none !important;
+      }
+      
+      /* Referral link section styling for mobile */
+      /* Description text below "Your Referral Link" headline */
+      .lg\:col-span-3 .text-lg {
+        font-size: 0.9rem !important;
+        line-height: 1.25rem !important;
+      }
+      
+      /* Description text below "Affiliate Link Generator" headline */
+      .text-muted-foreground.mb-4 {
+        font-size: 0.9rem !important;
+        line-height: 1.25rem !important;
+      }
+      
+      /* Actual affiliate link alignment */
+      .p-3.bg-background.rounded.border.text-center {
+        text-align: left !important;
+      }
+      
+      /* Stack buttons in website setup page on mobile */
+      .border.rounded-lg.p-6.bg-card .flex.items-center.gap-4.mb-4,
+      .border.rounded-lg.p-6.bg-card .flex.gap-4.justify-start {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+      
+      .border.rounded-lg.p-6.bg-card .flex.items-center.gap-4.mb-4 button,
+      .border.rounded-lg.p-6.bg-card .flex.gap-4.justify-start button {
+        width: 100% !important;
+      }
+      
+      /* Make all paragraph and list text smaller on mobile */
+      p, 
+      .text-muted-foreground,
+      ul li,
+      ol li {
+        font-size: 0.9rem !important;
+        line-height: 1.25rem !important;
+      }
+      
+      /* Make option description text smaller on forms */
+      .space-y-0\.5 p.text-sm,
+      .space-y-2 p.text-sm,
+      .flex.items-center.space-x-2 p.text-sm,
+      label + p.text-sm,
+      .space-y-2 div.text-sm {
+        font-size: 0.9rem !important;
+        line-height: 1.25rem !important;
+      }
+      
+      /* Keep consistent spacing between list items */
+      ul.space-y-1 li,
+      ol.space-y-1 li {
+        margin-top: 0.25rem !important;
+        margin-bottom: 0.25rem !important;
+      }
+      
+      ul.space-y-2 li,
+      ol.space-y-2 li {
+        margin-top: 0.375rem !important;
+        margin-bottom: 0.375rem !important;
+      }
+      
+      /* Reposition Save Settings button on mobile */
+      form .fixed.top-24.right-8 {
+        position: fixed !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: 20px !important;
+        left: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        z-index: 50 !important;
+      }
+      
+      form .fixed.top-24.right-8 button {
+        width: 90% !important;
+        max-width: 300px !important;
+      }
+      
+      /* Make table headers smaller on mobile */
+      table th {
+        font-size: 0.9rem !important;
+        padding: 0.75rem 0.5rem !important;
+        white-space: nowrap !important;
+      }
+      
+      /* Adjust table cell content on mobile */
+      table td {
+        font-size: 0.9rem !important;
+        padding: 0.75rem 0.5rem !important;
+        white-space: nowrap !important;
+      }
+      
+      /* Make tables more responsive */
+      .overflow-x-auto {
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+      
+      /* Ensure table takes full width */
+      .overflow-x-auto table {
+        width: 100% !important;
+        /* min-width: max-content !important; */
+      }
+      
+      /* Make badge/pill text smaller */
+      .px-2.py-1.rounded-full.text-xs {
+        font-size: 0.7rem !important;
+        padding: 0.1rem 0.5rem !important;
+      }
+      
+      /* Reposition Create New Agent button on My Agents page */
+      .w-full > .flex.justify-between.items-center.mb-8,
+      .container.mx-auto.py-8 > .flex.justify-between.items-center.mb-6 {
+        flex-direction: column-reverse !important;
+        margin-bottom: 1.5rem !important;
+        gap: 1rem !important;
+      }
+      
+      .w-full > .flex.justify-between.items-center.mb-8 h1,
+      .container.mx-auto.py-8 > .flex.justify-between.items-center.mb-6 h1 {
+        margin-bottom: 0 !important;
+      }
+      
+      .w-full > .flex.justify-between.items-center.mb-8 a,
+      .container.mx-auto.py-8 > .flex.justify-between.items-center.mb-6 > div {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+      }
+      
+      .w-full > .flex.justify-between.items-center.mb-8 a button,
+      .container.mx-auto.py-8 > .flex.justify-between.items-center.mb-6 a button,
+      .container.mx-auto.py-8 > .flex.justify-between.items-center.mb-6 button {
+        width: 100% !important;
+        max-width: 250px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      
+      /* Reset space-x-4 in button containers for mobile */
+      .container.mx-auto.py-8 > .flex.justify-between.items-center.mb-6 .flex.space-x-4 {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        gap: 0.5rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      .container.mx-auto.py-8 > .flex.justify-between.items-center.mb-6 .flex.space-x-4 > * {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      
+      /* Remove horizontal padding for product creation form on mobile */
+      .container.mx-auto.py-8 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      
+      /* Position Add Header and Add Parameter buttons on mobile */
+      .space-y-4.pt-4 > .flex.justify-between.items-center,
+      .space-y-4 > .flex.justify-between.items-center {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        margin-bottom: 1rem !important;
+      }
+      
+      .space-y-4.pt-4 > .flex.justify-between.items-center button,
+      .space-y-4 > .flex.justify-between.items-center button {
+        width: 100% !important;
+        max-width: 250px !important;
+        justify-content: center !important;
+      }
+      
+      /* Set tab button padding on mobile */
+      .tabs button, .tab, .tab-btn {
+        padding: 12px 20px !important;
+      }
+    }
+  }
+}

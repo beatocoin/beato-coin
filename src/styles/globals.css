@@ -1,0 +1,4 @@
+/* Hide the Websites section on the /user-settings page */
+body[data-page="user-settings"] .websites-section {
+  display: none !important;
+} 
