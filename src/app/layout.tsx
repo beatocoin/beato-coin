@@ -31,14 +31,14 @@ export default function RootLayout({
       setIsCollapsed(savedState === 'true');
     } else {
       // Otherwise set based on screen size
-      const isMobile = window.innerWidth < 768;
+      const isMobile = window.innerWidth < 640;
       setIsCollapsed(isMobile);
       localStorage.setItem('sidebarCollapsed', isMobile.toString());
     }
 
     // Add resize listener to update sidebar state on window resize
     const handleResize = () => {
-      const isMobile = window.innerWidth < 768;
+      const isMobile = window.innerWidth < 640;
       // Only auto-collapse/expand if user hasn't set a preference
       if (localStorage.getItem('sidebarCollapsed') === null) {
         setIsCollapsed(isMobile);
@@ -65,8 +65,8 @@ export default function RootLayout({
                 <div className="flex">
                   <Sidebar />
                   {isClient && (
-                    <main className={`flex-1 py-6 px-[10px] md:px-6 overflow-x-hidden transition-all duration-300 ${isCollapsed ? 'md:pl-16' : 'md:pl-0'}`}>
-                      <div className="max-w-7xl mx-auto">
+                    <main className={`flex-1 py-0 px-0 overflow-x-hidden transition-all duration-300 ${isCollapsed ? 'sm:pl-16' : 'sm:pl-0'}`}>
+                      <div className="w-full">
                         {children}
                       </div>
                     </main>

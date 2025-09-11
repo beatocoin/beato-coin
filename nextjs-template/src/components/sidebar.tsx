@@ -181,7 +181,7 @@ export function Sidebar() {
                   href={subItem.href}
                   onClick={() => {
                     // Close sidebar on mobile when link is clicked
-                    if (window.innerWidth < 768 && !isCollapsed) {
+                    if (window.innerWidth < 640 && !isCollapsed) {
                       setIsCollapsed(true);
                       localStorage.setItem('sidebarCollapsed', 'true');
                     }
@@ -210,7 +210,7 @@ export function Sidebar() {
         target={item.target || undefined}
         onClick={() => {
           // Close sidebar on mobile when link is clicked
-          if (window.innerWidth < 768 && !isCollapsed) {
+          if (window.innerWidth < 640 && !isCollapsed) {
             setIsCollapsed(true);
             localStorage.setItem('sidebarCollapsed', 'true');
           }
@@ -237,7 +237,7 @@ export function Sidebar() {
     <div 
       className={cn(
         "bg-[var(--color-dark)] transition-all duration-300 min-h-screen",
-        isCollapsed ? "w-16" : "w-64"
+        isCollapsed ? "w-12 sm:w-16" : "w-64"
       )}
     >
       <div className="flex justify-center py-5">
