@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3011:3001"
+    container_name: prod-nextjs-app
+    # Environment variables can be managed via an .env file copied during build (as per Dockerfile) 
+    # or specified here using env_file or environment keys if needed. 

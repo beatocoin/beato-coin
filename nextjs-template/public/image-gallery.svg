@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300" viewBox="0 0 600 300">
+  <rect width="600" height="300" fill="#f8fdff" rx="8" ry="8"/>
+  
+  <!-- Gallery Grid -->
+  <rect x="20" y="20" width="170" height="120" fill="#e0e6ea" rx="4" ry="4"/>
+  <rect x="30" y="30" width="150" height="100" fill="#d0d6da" rx="2" ry="2"/>
+  <circle cx="60" cy="55" r="10" fill="#5EB1BF"/>
+  <polygon points="30,130 180,130 105,70" fill="#a0a6aa"/>
+  
+  <rect x="210" y="20" width="170" height="120" fill="#e0e6ea" rx="4" ry="4"/>
+  <rect x="220" y="30" width="150" height="100" fill="#d0d6da" rx="2" ry="2"/>
+  <circle cx="250" cy="55" r="10" fill="#E07A5F"/>
+  <polygon points="220,130 370,130 295,70" fill="#a0a6aa"/>
+  
+  <rect x="400" y="20" width="170" height="120" fill="#e0e6ea" rx="4" ry="4"/>
+  <rect x="410" y="30" width="150" height="100" fill="#d0d6da" rx="2" ry="2"/>
+  <circle cx="440" cy="55" r="10" fill="#FCB97D"/>
+  <polygon points="410,130 560,130 485,70" fill="#a0a6aa"/>
+  
+  <rect x="20" y="160" width="170" height="120" fill="#e0e6ea" rx="4" ry="4"/>
+  <rect x="30" y="170" width="150" height="100" fill="#d0d6da" rx="2" ry="2"/>
+  <circle cx="60" cy="195" r="10" fill="#233D4D"/>
+  <polygon points="30,270 180,270 105,210" fill="#a0a6aa"/>
+  
+  <rect x="210" y="160" width="170" height="120" fill="#e0e6ea" rx="4" ry="4"/>
+  <rect x="220" y="170" width="150" height="100" fill="#d0d6da" rx="2" ry="2"/>
+  <circle cx="250" cy="195" r="10" fill="#5EB1BF"/>
+  <polygon points="220,270 370,270 295,210" fill="#a0a6aa"/>
+  
+  <rect x="400" y="160" width="170" height="120" fill="#e0e6ea" rx="4" ry="4"/>
+  <rect x="410" y="170" width="150" height="100" fill="#d0d6da" rx="2" ry="2"/>
+  <circle cx="440" cy="195" r="10" fill="#E07A5F"/>
+  <polygon points="410,270 560,270 485,210" fill="#a0a6aa"/>
+</svg> 

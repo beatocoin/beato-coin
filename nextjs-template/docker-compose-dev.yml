@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3002:3002"
+    volumes:
+      # Mount the project directory, but exclude node_modules and .next
+      - .:/app
+      # Use anonymous volumes to persist node_modules and .next inside the container
+      - /app/node_modules
+      - /app/.next
+    container_name: dev-nextjs-app
+    # The command is specified in the Dockerfile.dev (CMD ["pnpm", "dev"])
+    env_file:
+      - .env.local 

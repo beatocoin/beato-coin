@@ -1,0 +1,17 @@
+.git
+.next
+node_modules
+npm-debug.log
+README.md
+.env.local
+.env.development
+.env.test
+.env.production
+.dockerignore
+Dockerfile
+.gitignore
+.eslintrc*
+.prettierrc*
+.vscode
+coverage
+.vercel 

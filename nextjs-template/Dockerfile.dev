@@ -1,0 +1,37 @@
+# Stage 1: Dependencies
+FROM node:20-alpine AS deps
+WORKDIR /app
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install
+
+# Stage 2: Development
+FROM node:20-alpine AS dev
+WORKDIR /app
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Copy dependencies from deps stage
+COPY --from=deps /app/node_modules ./node_modules
+
+# Copy source code
+COPY . .
+
+# Set environment variables
+ENV NODE_ENV=development
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3002
+ENV HOSTNAME="0.0.0.0"
+
+# Expose development port
+EXPOSE 3002
+
+# Start development server
+CMD ["pnpm", "dev"] 
