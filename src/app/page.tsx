@@ -2,6 +2,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { createClient } from "@/utils/supabase/client";
 import { 
@@ -97,7 +98,7 @@ export default function Home() {
   }, [supabase]);
 
   return (
-    <main className="pt-0 pr-0 pl-0 pb-8 w-full">
+    <main className="w-full">
       {/* Hero Section */}
       <section className="relative border-b w-full" style={{ borderColor: colors.secondary, zIndex: 10 }}>
         {/* Image Background */}
@@ -124,18 +125,15 @@ export default function Home() {
         
         {/* Content */}
         <div
-          className="relative z-10 w-full"
+          className="relative z-10 w-full px-4"
           style={{
-            maxWidth: '1100px',
-            margin: 'auto',
             paddingTop: '5rem',
             paddingBottom: '5rem',
-            width: '95%',
             boxSizing: 'border-box',
           }}
         >
           <h1
-            className="text-[1.4rem] leading-[1.75rem] md:text-[3rem] lg:text-[3rem] md:leading-[3.75rem] font-bold mb-6 text-center md:pb-4"
+            className="text-[1.4rem] leading-[1.75rem] md:text-[3rem] lg:text-[3rem] md:leading-[3.75rem] font-bold mb-4 text-center"
             style={{
               background: `linear-gradient(90deg, ${colors.primary}, ${colors.accent1}, ${colors.accent2})`,
               WebkitBackgroundClip: 'text',
@@ -152,7 +150,19 @@ export default function Home() {
             `}</style>
             <span className="hero-h1-overwrite">Beato Coin: The Future of Water Security</span>
           </h1>
-          <p className="text-[1.1rem] leading-[1.6rem] md:text-xl mb-12 text-center hero-p-overwrite" style={{ color: 'white' }}>
+          
+          {/* Coin Image */}
+          <div className="flex justify-center mb-8">
+            <Image 
+              src="/coin.jpg" 
+              alt="Beato Coin" 
+              width={200} 
+              height={200} 
+              className="rounded-full shadow-lg"
+            />
+          </div>
+          
+          <p className="text-[1.1rem] leading-[1.6rem] md:text-xl mb-12 text-center hero-p-overwrite mx-auto" style={{ color: 'white', maxWidth: '1000px' }}>
             The Beato Coin Token merges physical and digital assets by tokenizing your water supply. Each Beato Coin represents a case of water that you can redeem at a later date. Secure your future water needs and peace of mind knowing that your water inventory is ready and available when you need it most.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
