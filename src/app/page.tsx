@@ -105,7 +105,7 @@ export default function Home() {
         <div
           className="absolute inset-0 w-full h-full"
           style={{
-            backgroundImage: `url('/home-banner.webp')`,
+            backgroundImage: `url('/banner.png')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -133,7 +133,7 @@ export default function Home() {
           }}
         >
           <h1
-            className="text-[1.4rem] leading-[1.75rem] md:text-[3rem] lg:text-[3rem] md:leading-[3.75rem] font-bold mb-4 text-center"
+            className="text-[1.4rem] leading-[1.75rem] md:text-[3rem] lg:text-[3rem] md:leading-[3.75rem] font-bold mb-8 text-center"
             style={{
               background: `linear-gradient(90deg, ${colors.primary}, ${colors.accent1}, ${colors.accent2})`,
               WebkitBackgroundClip: 'text',
@@ -153,13 +153,23 @@ export default function Home() {
           
           {/* Coin Image */}
           <div className="flex justify-center mb-8">
-            <Image 
-              src="/coin.jpg" 
-              alt="Beato Coin" 
-              width={200} 
-              height={200} 
-              className="rounded-full shadow-lg"
-            />
+            <div 
+              className="rounded-lg"
+              style={{ 
+                padding: '25px',
+                backgroundColor: colors.accent1,
+                display: 'inline-block'
+              }}
+            >
+              <Image
+                src="/coin-square.png"
+                alt="Beato Coin"
+                width={300}
+                height={300}
+                className="rounded-lg shadow-lg max-w-[300px]"
+                style={{ border: `3px solid ${colors.primary}` }}
+              />
+            </div>
           </div>
           
           <p className="text-[1.1rem] leading-[1.6rem] md:text-xl mb-12 text-center hero-p-overwrite mx-auto" style={{ color: 'white', maxWidth: '1000px' }}>

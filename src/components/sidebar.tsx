@@ -121,12 +121,6 @@ export function Sidebar() {
       title: "Redeem Beato Coin",
       icon: ShoppingCart
     }] : []),
-    {
-      href: "https://www.aquabeato.shop/",
-      title: "Shop",
-      icon: ShoppingBag,
-      target: "_blank"
-    },
     // Show admin-only menu items if user is admin
     ...(isAdmin ? [
       {
@@ -137,10 +131,9 @@ export function Sidebar() {
     ] : []),
     // Contact Us link at the bottom
     {
-      href: "https://www.aquabeato.shop/contact-us/",
+      href: "/contact",
       title: "Contact Us",
-      icon: Settings,
-      target: "_blank"
+      icon: Settings
     },
   ]
 
