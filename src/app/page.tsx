@@ -154,11 +154,14 @@ export default function Home() {
           {/* Coin Image */}
           <div className="flex justify-center mb-8">
             <div 
-              className="rounded-lg"
+              className="rounded-lg shadow-2xl"
               style={{ 
                 padding: '25px',
-                backgroundColor: colors.accent1,
-                display: 'inline-block'
+                background: `linear-gradient(135deg, ${colors.accent1}, ${colors.accent2})`,
+                display: 'inline-block',
+                boxShadow: `0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)`,
+                transform: 'perspective(1000px) rotateX(5deg)',
+                transition: 'all 0.3s ease'
               }}
             >
               <Image
