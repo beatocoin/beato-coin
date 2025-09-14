@@ -63,7 +63,13 @@ export default function RedeemTokenPage() {
         {loading ? (
           <div className="text-gray-500 text-center">Loading...</div>
         ) : !isLoggedIn ? (
-          <div className="text-center text-gray-600">Please log in to view your Beato Coin balance.</div>
+          <div className="text-center text-gray-600">
+            Please connect your wallet on the{" "}
+            <a href="/wallet" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">
+              Wallet Page
+            </a>{" "}
+            to see your redeemable coins.
+          </div>
         ) : error ? (
           <div className="text-red-500 text-center">{error}</div>
         ) : (
