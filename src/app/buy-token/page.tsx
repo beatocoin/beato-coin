@@ -489,9 +489,11 @@ export default function BuyTokenPage() {
                 <>
                   <a
                     href="/auth"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition text-center block"
                   >
-                    Create Free Account
+                    Create account to purchase
                   </a>
                   <p className="text-center text-gray-600 mt-2 text-xs">Please Create a Free Account or Login to Purchase Beato Coin</p>
                 </>
@@ -503,6 +505,18 @@ export default function BuyTokenPage() {
                 <p className="text-red-600 text-center mt-2 font-semibold">{purchaseError}</p>
               )}
             </form>
+            <div
+              className="mt-5 rounded-md border border-amber-200 bg-amber-50 px-3 py-3 text-sm text-amber-950"
+              role="note"
+            >
+              <p className="font-medium text-amber-900 mb-2">Notice</p>
+              <p className="text-amber-900/90 mb-2">
+                Tokens cannot currently be purchased. If you would like to test the functionality, you can use the credit card number{' '}
+                <span className="font-mono font-semibold whitespace-nowrap">1212 1212 1212 1212</span>
+                {' '}with an expiration date in the future and a CVV code of{' '}
+                <span className="font-mono font-semibold">000</span>.
+              </p>
+            </div>
           </div>
           {isLoggedIn && (
             <div className="w-full max-w-4xl mt-8">

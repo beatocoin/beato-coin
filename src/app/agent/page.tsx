@@ -1685,7 +1685,7 @@ export default function AgentPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 relative">
+    <div className="container mx-auto px-4 py-8 relative" style={{ marginTop: '25px' }}>
       {/* Fixed Chat History Button on Desktop */}
       <div className="hidden md:block">
         <div className="fixed top-24 right-8 z-50">
@@ -1845,7 +1845,7 @@ export default function AgentPage() {
               {/* Render agent description as HTML if present */}
               {agent.description ? (
                 <div
-                  className="text-lg text-center text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
+                  className="text-sm text-center text-gray-600 mb-12 max-w-5xl mx-auto leading-relaxed"
                   dangerouslySetInnerHTML={{ __html: agent.description }}
                 />
               ) : null}

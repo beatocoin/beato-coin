@@ -112,7 +112,7 @@ export function Sidebar() {
       icon: Wallet
     },
     {
-      href: "https://www.aquabeato.shop/pre-buy/",
+      href: "/buy-token",
       title: "Buy Beato Coin",
       icon: ShoppingCart
     },
