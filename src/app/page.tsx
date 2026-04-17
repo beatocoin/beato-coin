@@ -121,7 +121,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4">
                 <Link href="/buy-token" className="w-full sm:w-auto">
                   <button 
-                    className="w-full sm:w-auto px-8 py-3 text-white font-semibold rounded-full transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 text-[1rem]"
+                    className="w-full sm:w-auto px-8 py-3 text-white font-semibold rounded-lg transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 text-[1rem] min-w-[160px]"
                     style={{ backgroundColor: colors.accent1 }}
                   >
                     Buy $BEATO
@@ -129,7 +129,8 @@ export default function Home() {
                 </Link>
                 <Link href="/auth?tab=register" className="w-full sm:w-auto">
                   <button 
-                    className="w-full sm:w-auto px-8 py-3 bg-white text-gray-900 font-semibold rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all shadow-sm text-[1rem]"
+                    className="w-full sm:w-auto px-8 py-3 text-white font-semibold rounded-lg transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 text-[1rem] min-w-[160px]"
+                    style={{ backgroundColor: colors.accent2 }}
                   >
                     Create Account
                   </button>
@@ -137,7 +138,8 @@ export default function Home() {
                 <Modal>
                   <ModalTrigger asChild>
                     <button 
-                      className="w-full sm:w-auto px-8 py-3 bg-white text-gray-900 font-semibold rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all shadow-sm text-[1rem] flex items-center justify-center gap-2"
+                      className="w-full sm:w-auto px-8 py-3 text-white font-semibold rounded-lg transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 text-[1rem] flex items-center justify-center gap-2 min-w-[160px]"
+                      style={{ backgroundColor: colors.primary }}
                     >
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
@@ -195,8 +197,8 @@ export default function Home() {
                 style={{ background: `linear-gradient(to top right, ${colors.accent1}, ${colors.accent2})` }}
               />
               
-              <div className="relative z-10 animate-float p-2 rounded-full bg-white/50 backdrop-blur-sm border border-gray-100 shadow-2xl ring-1 ring-black/5">
-                <div className="rounded-full overflow-hidden border-4 border-white shadow-inner bg-gray-50">
+              <div className="relative z-10 animate-float p-3 rounded-full bg-white/60 backdrop-blur-md shadow-2xl ring-1 ring-black/10" style={{ border: `2px solid ${colors.primary}` }}>
+                <div className="rounded-full overflow-hidden border-4 border-white shadow-inner bg-gray-50 flex items-center justify-center">
                   <Image
                     src="/coin-square.png"
                     alt="Beato Coin"
@@ -213,59 +215,119 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Countdown Clock Section */}
-      {presaleEndDate && (
-        <div style={{ maxWidth: '95%', margin: 'auto' }}>
-          <CountdownClock endDate={presaleEndDate} />
-        </div>
-      )}
+      {/* Token Details & How It Works Section */}
+      <section className="w-full py-16 border-t border-[#d8d8d8]" style={{ backgroundColor: '#f8fdff' }}>
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            
+            {/* Left Column: How It Works */}
+            <div className="flex flex-col gap-6 w-full max-w-xl mx-auto lg:max-w-none lg:mx-0">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">How It Works</h2>
+              
+              {/* Block 1 */}
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col items-center text-center gap-4 transition-all hover:shadow-md">
+                <div className="rounded-full w-14 h-14 shrink-0 flex items-center justify-center" style={{ backgroundColor: colors.accent1 }}>
+                  <span className="text-xl font-bold text-white">1</span>
+                </div>
+                <div className="w-full">
+                  <h3 className="text-xl font-bold mb-2 text-gray-900">Create a Free Account</h3>
+                  <p className="text-gray-600 text-[0.95rem] mb-4">Create your free account to get started securing your future water needs.</p>
+                  <div className="flex justify-center">
+                    <Link href="/auth?tab=register" className="block w-full max-w-[220px]">
+                      <button type="button" className="w-full px-6 py-2.5 text-white font-medium rounded-lg transition-colors text-sm" style={{ backgroundColor: colors.accent2 }}>
+                        Create Account
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Block 2 */}
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col items-center text-center gap-4 transition-all hover:shadow-md">
+                <div className="rounded-full w-14 h-14 shrink-0 flex items-center justify-center" style={{ backgroundColor: colors.accent2 }}>
+                  <span className="text-xl font-bold text-white">2</span>
+                </div>
+                <div className="w-full">
+                  <h3 className="text-xl font-bold mb-2 text-gray-900">Create or Connect Your Wallet</h3>
+                  <p className="text-gray-600 text-[0.95rem] mb-4">Connect your choice of over 400 Wallets or create a Beato Wallet that offers special rewards like AirDrops and Beato NFTs.</p>
+                  <div className="flex justify-center">
+                    <Link href="/wallet" className="block w-full max-w-[220px]">
+                      <button type="button" className="w-full px-6 py-2.5 text-white font-medium rounded-lg transition-colors text-sm" style={{ backgroundColor: colors.primary }}>
+                        Wallet
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Block 3 */}
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col items-center text-center gap-4 transition-all hover:shadow-md">
+                <div className="rounded-full w-14 h-14 shrink-0 flex items-center justify-center" style={{ backgroundColor: colors.primary }}>
+                  <span className="text-xl font-bold text-white">3</span>
+                </div>
+                <div className="w-full">
+                  <h3 className="text-xl font-bold mb-2 text-gray-900">Buy Beato Tokens</h3>
+                  <p className="text-gray-600 text-[0.95rem] mb-4">Each token represents a case of water and retains its stable value at your purchased price or increases in value with market demand and token supply.</p>
+                  <div className="flex justify-center">
+                    <Link href="/buy-token" className="block w-full max-w-[220px]">
+                      <button type="button" className="w-full px-6 py-2.5 text-white font-medium rounded-lg transition-colors text-sm" style={{ backgroundColor: colors.accent1 }}>
+                        Buy $BEATO
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-      {/* How It Works */}
-      <section className="w-full py-20" style={{ backgroundColor: colors.secondary }}>
-        <div className="w-full" style={{ maxWidth: '95%', margin: 'auto' }}>
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Block 1 */}
-            <div className="bg-white rounded-2xl shadow-lg py-6 px-[25px] flex flex-col items-center border border-gray-200">
-              <div className="rounded-full w-16 h-16 flex items-center justify-center mb-4" style={{ backgroundColor: colors.accent1 }}>
-                <span className="text-2xl font-bold text-white">1</span>
+            {/* Right Column: Token Details Table */}
+            <div className="lg:sticky lg:top-24 w-full max-w-xl mx-auto lg:max-w-none lg:mx-0">
+              <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Token Details</h2>
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <table className="w-full text-left border-collapse">
+                  <tbody className="divide-y divide-gray-100">
+                    <tr className="hover:bg-gray-50/50 transition-colors">
+                      <td className="py-5 px-6 text-sm font-bold text-gray-900 w-1/2">Token Name</td>
+                      <td className="py-5 px-6 text-sm text-gray-700 w-1/2">Beato Coin</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50 transition-colors">
+                      <td className="py-5 px-6 text-sm font-bold text-gray-900">Ticker</td>
+                      <td className="py-5 px-6 text-sm text-gray-700">$BEATO</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50 transition-colors">
+                      <td className="py-5 px-6 text-sm font-bold text-gray-900">Network / Chain</td>
+                      <td className="py-5 px-6 text-sm text-gray-700">Ethereum<br />(Mainnet)</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50 transition-colors">
+                      <td className="py-5 px-6 text-sm font-bold text-gray-900">Token Standard</td>
+                      <td className="py-5 px-6 text-sm text-gray-700">ERC-20</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50 transition-colors">
+                      <td className="py-5 px-6 text-sm font-bold text-gray-900">Total Supply</td>
+                      <td className="py-5 px-6 text-sm text-gray-700">2,300,000</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50 transition-colors">
+                      <td className="py-5 px-6 text-sm font-bold text-gray-900">Mintable</td>
+                      <td className="py-5 px-6 text-sm text-gray-700">Yes</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50 transition-colors">
+                      <td className="py-5 px-6 text-sm font-bold text-gray-900">Initial Price</td>
+                      <td className="py-5 px-6 text-sm text-gray-700">Price Per Case</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-2 text-center">Create a Free Account</h3>
-              <p className="text-gray-600 text-[0.9rem] md:text-[1rem] mb-6 text-center">Create your free account to get started securing your future water needs.</p>
-              <Link href="/auth?tab=register">
-                <button className="px-[50px] py-2 text-white font-medium rounded-lg transition-colors" style={{ backgroundColor: colors.accent2 }}>
-                  Create Account
-                </button>
-              </Link>
             </div>
-            {/* Block 2 */}
-            <div className="bg-white rounded-2xl shadow-lg py-6 px-[25px] flex flex-col items-center border border-gray-200">
-              <div className="rounded-full w-16 h-16 flex items-center justify-center mb-4" style={{ backgroundColor: colors.accent2 }}>
-                <span className="text-2xl font-bold text-white">2</span>
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-2 text-center">Create or Connect Your Wallet</h3>
-              <p className="text-gray-600 text-[0.9rem] md:text-[1rem] mb-6 text-center">Connect your choice of over 400 Wallets or create a Beato Wallet that offers special rewards like AirDrops and Beato NFTs.</p>
-              <Link href="/wallet">
-                <button className="px-[50px] py-2 text-white font-medium rounded-lg transition-colors" style={{ backgroundColor: colors.primary }}>
-                  Wallet
-                </button>
-              </Link>
-            </div>
-            {/* Block 3 */}
-            <div className="bg-white rounded-2xl shadow-lg py-6 px-[25px] flex flex-col items-center border border-gray-200">
-              <div className="rounded-full w-16 h-16 flex items-center justify-center mb-4" style={{ backgroundColor: colors.primary }}>
-                <span className="text-2xl font-bold text-white">3</span>
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-2 text-center">Buy Beato Tokens</h3>
-              <p className="text-gray-600 text-[0.9rem] md:text-[1rem] mb-6 text-center">Each token represents a case of water and retains its stable value at your purchased price or increases in value with market demand and token supply.</p>
-              <Link href="/buy-token">
-                <button className="px-[50px] py-2 text-white font-medium rounded-lg transition-colors" style={{ backgroundColor: colors.accent1 }}>
-                  Buy $BEATO
-                </button>
-              </Link>
-            </div>
+
           </div>
         </div>
       </section>
+
+      {/* Countdown Clock Section */}
+      {presaleEndDate && (
+        <div style={{ maxWidth: '95%', margin: 'auto' }} className="py-8">
+          <CountdownClock endDate={presaleEndDate} />
+        </div>
+      )}
 
       {/* Info Blocks Section */}
       <section className="w-full py-12" style={{ backgroundColor: colors.secondary }} id="water-security">
