@@ -121,7 +121,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4">
                 <Link href="/buy-token" className="w-full sm:w-auto">
                   <button 
-                    className="w-full sm:w-auto px-8 py-4 text-white font-semibold rounded-full transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-[1.05rem]"
+                    className="w-full sm:w-auto px-8 py-3 text-white font-semibold rounded-full transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 text-[1rem]"
                     style={{ backgroundColor: colors.accent1 }}
                   >
                     Buy $BEATO
@@ -129,7 +129,7 @@ export default function Home() {
                 </Link>
                 <Link href="/auth?tab=register" className="w-full sm:w-auto">
                   <button 
-                    className="w-full sm:w-auto px-8 py-4 bg-white text-gray-900 font-semibold rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all shadow-sm text-[1.05rem]"
+                    className="w-full sm:w-auto px-8 py-3 bg-white text-gray-900 font-semibold rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all shadow-sm text-[1rem]"
                   >
                     Create Account
                   </button>
@@ -137,7 +137,7 @@ export default function Home() {
                 <Modal>
                   <ModalTrigger asChild>
                     <button 
-                      className="w-full sm:w-auto px-8 py-4 bg-white text-gray-900 font-semibold rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all shadow-sm text-[1.05rem] flex items-center justify-center gap-2"
+                      className="w-full sm:w-auto px-8 py-3 bg-white text-gray-900 font-semibold rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all shadow-sm text-[1rem] flex items-center justify-center gap-2"
                     >
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
@@ -195,15 +195,17 @@ export default function Home() {
                 style={{ background: `linear-gradient(to top right, ${colors.accent1}, ${colors.accent2})` }}
               />
               
-              <div className="relative z-10 animate-[float_6s_ease-in-out_infinite]">
-                <Image
-                  src="/coin-square.png"
-                  alt="Beato Coin"
-                  width={480}
-                  height={480}
-                  className="w-full max-w-[280px] sm:max-w-[360px] lg:max-w-[480px] object-cover drop-shadow-2xl"
-                  priority
-                />
+              <div className="relative z-10 animate-float p-2 rounded-full bg-white/50 backdrop-blur-sm border border-gray-100 shadow-2xl ring-1 ring-black/5">
+                <div className="rounded-full overflow-hidden border-4 border-white shadow-inner bg-gray-50">
+                  <Image
+                    src="/coin-square.png"
+                    alt="Beato Coin"
+                    width={480}
+                    height={480}
+                    className="w-full max-w-[280px] sm:max-w-[360px] lg:max-w-[480px] object-cover scale-105"
+                    priority
+                  />
+                </div>
               </div>
             </div>
 
