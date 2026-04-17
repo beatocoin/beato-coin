@@ -100,11 +100,28 @@ export default function Home() {
   return (
     <main className="w-full">
       {/* Hero Section */}
-      <section className="relative w-full bg-white overflow-hidden">
-        {/* Subtle background gradient */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-50/50 via-white to-white pointer-events-none" />
-        
-        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-32">
+      <section className="relative w-full overflow-hidden bg-white">
+        {/* Banner image — kept subtle behind a white wash */}
+        <div
+          className="absolute inset-0 pointer-events-none bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/banner.png')" }}
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0.93) 0%, rgba(255,255,255,0.87) 45%, rgba(255,255,255,0.95) 100%)",
+          }}
+          aria-hidden
+        />
+        {/* Hint of cool tone at top-right (optional, very light) */}
+        <div
+          className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-50/40 via-transparent to-transparent"
+          aria-hidden
+        />
+
+        <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-32">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             
             {/* Left Column: Text & CTAs */}
