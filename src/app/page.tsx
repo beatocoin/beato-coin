@@ -185,12 +185,12 @@ export default function Home() {
                 Create Account
               </button>
             </Link>
-            <a href="https://www.aquabeato.shop/pre-buy/" target="_blank" rel="noopener noreferrer" className="w-[300px]">
+            <Link href="/buy-token" className="w-[300px]">
               <button className="w-full px-[50px] py-3 text-white font-semibold rounded-lg transition-colors"
                 style={{ backgroundColor: colors.accent1 }}>
                 Buy $BEATO
               </button>
-            </a>
+            </Link>
             <Modal>
               <ModalTrigger asChild>
                 <button
@@ -286,11 +286,11 @@ export default function Home() {
               </div>
               <h3 className="text-xl md:text-2xl font-bold mb-2 text-center">Buy Beato Tokens</h3>
               <p className="text-gray-600 text-[0.9rem] md:text-[1rem] mb-6 text-center">Each token represents a case of water and retains its stable value at your purchased price or increases in value with market demand and token supply.</p>
-              <a href="https://www.aquabeato.shop/pre-buy/" target="_blank" rel="noopener noreferrer">
+              <Link href="/buy-token">
                 <button className="px-[50px] py-2 text-white font-medium rounded-lg transition-colors" style={{ backgroundColor: colors.accent1 }}>
                   Buy $BEATO
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

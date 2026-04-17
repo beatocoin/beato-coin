@@ -12,8 +12,9 @@ import SmartSwapCryptoButton from '@app/components/crypto/SmartSwapCryptoButton'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectLabel } from '@submodule/components/ui/select';
 import React from 'react';
 import { createClient } from '@submodule/utils/supabase/client';
+import Link from 'next/link';
 import { modal, emailOnlyModal } from '@app/context/index';
-import EVMWalletCreateButton from '../../components/crypto/EVMWalletCreateButton';
+import EVMWalletCreateButton, { ConnectBeatoWalletButton } from '../../components/crypto/EVMWalletCreateButton';
 import useBeatoWalletStore from '../../stores/beatoWalletStore';
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from '@submodule/components/ui/table';
 import { AuthChangeEvent, Session } from '@supabase/supabase-js';
@@ -584,12 +585,12 @@ export default function WalletPage() {
   }, []);
 
   return (
-    <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 bg-gray-50/50">
+      <div className="max-w-[1000px] mx-auto">
         <Toaster position="top-right" />
-        <div className="flex justify-end items-center mb-4">
-          <div className="flex items-center gap-2">
-            <span className="font-medium text-sm">Blockchain</span>
+        <div className="flex justify-end items-center mb-6">
+          <div className="flex items-center gap-3">
+            <span className="font-medium text-sm text-gray-500">Network</span>
             <Select value={blockchain} onValueChange={async value => {
               setBlockchain(value);
               if (typeof window !== 'undefined') {
@@ -647,56 +648,63 @@ export default function WalletPage() {
           </div>
         </div>
         {/* Refresh Button */}
-        <div className="flex justify-end mb-6">
+        <div className="flex justify-end mb-8">
           <button
             type="button"
             onClick={handleRefresh}
             disabled={!connected || isRefreshing}
-            className="px-4 py-2 rounded font-medium bg-[var(--color-accent2)] text-white hover:opacity-90 transition disabled:opacity-50"
+            className="px-5 py-2.5 rounded-full font-semibold text-sm bg-[var(--color-accent2)] text-white hover:opacity-90 transition-opacity disabled:opacity-50 shadow-sm"
           >
-            {isRefreshing ? <Loader2 className="animate-spin h-5 w-5 inline-block mr-2" /> : null}
-            Refresh
+            {isRefreshing ? <Loader2 className="animate-spin h-4 w-4 inline-block mr-2" /> : null}
+            Refresh Balance
           </button>
         </div>
-        <h1 className="text-4xl font-bold mb-8 text-center">Wallet</h1>
         
         <div className="grid grid-cols-1 gap-8">
           {/* Wallet Card */}
-          <Card className="h-full bg-white py-[50px] px-[25px]">
+          <Card className="h-full bg-white py-12 px-6 sm:px-12 border-gray-200/60 shadow-sm rounded-2xl">
             {!connected ? (
               <>
-                <CardHeader className="md:px-[50px] text-center">
-                  <CardTitle className="text-center">Create or Connect Your Wallet</CardTitle>
+                <CardHeader className="text-center pb-2">
+                  <CardTitle className="text-3xl font-semibold tracking-tight text-gray-900">Connect your wallet</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-6 md:px-[50px] text-center">
-                  <div className="text-gray-600 mb-6">
-                    <p>You can create a new wallet or connect an existing one to access cryptocurrency features and manage your assets.</p>
+                <CardContent className="space-y-8 text-center">
+                  <div className="text-gray-500 text-[0.9375rem] max-w-md mx-auto leading-relaxed">
+                    <p>Create a new wallet or connect an existing one to manage your assets and access cryptocurrency features.</p>
                   </div>
                   {/* AppKit Create Wallet Button */}
-                  <div className="flex flex-col gap-4 sm:flex-row justify-center mb-4 w-full max-w-md mx-auto">
-                    <EVMWalletCreateButton showConnectBeatoButton={!beatoWallet.isConnected && !appKitAccount.isConnected} className="w-full" />
-                    <button
-                      type="button"
-                      onClick={() => modal.open({ view: 'Connect' })}
-                      className="w-full h-11 whitespace-nowrap overflow-hidden text-ellipsis font-medium text-md flex items-center justify-center text-center border border-gray-300 bg-white text-gray-900 hover:bg-gray-100"
-                    >
-                      Connect Other Wallet
-                    </button>
+                  <div className="flex flex-col gap-3 w-full max-w-sm mx-auto mb-4">
+                    <div className="flex flex-col gap-3 sm:flex-row justify-center">
+                      <EVMWalletCreateButton className="w-full rounded-full" />
+                      <button
+                        type="button"
+                        onClick={() => modal.open({ view: 'Connect' })}
+                        className="w-full h-11 rounded-full whitespace-nowrap overflow-hidden text-ellipsis font-semibold text-[0.9375rem] flex items-center justify-center text-center border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors shadow-sm"
+                      >
+                        Connect Other Wallet
+                      </button>
+                    </div>
+                    {!beatoWallet.isConnected && !appKitAccount.isConnected && (
+                      <div className="flex justify-center mt-2">
+                        <ConnectBeatoWalletButton className="w-full sm:w-2/3 rounded-full" />
+                      </div>
+                    )}
                   </div>
                 </CardContent>
               </>
             ) : (
               <>
-                <CardContent className="space-y-6 md:px-[50px] py-8">
+                <CardContent className="space-y-10 py-4">
                   {/* Wallet Address Section */}
                   <div className="flex items-center justify-center">
-                    <div className="flex items-center justify-between border border-[#d8d8d8] bg-white p-3 rounded-lg w-full max-w-xl">
-                      <span className="text-gray-700 font-medium truncate mx-auto pr-6">
+                    <div className="flex items-center justify-between border border-gray-200/80 bg-gray-50/50 px-4 py-3 rounded-2xl w-full max-w-md transition-colors hover:bg-gray-50">
+                      <span className="text-gray-600 font-medium text-sm truncate mx-auto pr-6">
                         {address}
                       </span>
                       <button 
                         onClick={() => copyToClipboard(address || "")}
-                        className="text-gray-500 hover:text-gray-800"
+                        className="text-gray-400 hover:text-gray-700 transition-colors p-1"
+                        title="Copy Address"
                       >
                         <Copy className="h-4 w-4" />
                       </button>
@@ -704,15 +712,15 @@ export default function WalletPage() {
                   </div>
                   
                   {/* Wallet Balance Section */}
-                  <div className="text-center mt-12">
-                    <div className="text-6xl font-bold mb-2 flex items-center justify-center min-h-[56px]">
+                  <div className="text-center mt-10 mb-10">
+                    <div className="text-gray-500 text-sm font-medium tracking-wide uppercase mb-3">Total Balance</div>
+                    <div className="text-5xl sm:text-6xl font-bold tracking-tighter text-gray-900 flex items-center justify-center min-h-[72px]">
                       {isLoadingApi ? (
-                        <Loader2 className="animate-spin h-10 w-10 text-gray-400" />
+                        <Loader2 className="animate-spin h-10 w-10 text-gray-300" />
                       ) : (
                         formatUSD((apiResponse?.total_networth_usd || 0) + beatoValue)
                       )}
                     </div>
-                    <div className="text-gray-500">Total Wallet Value</div>
                   </div>
                   
                   {/* Wallet Connection Button */}
@@ -723,21 +731,19 @@ export default function WalletPage() {
                   )}
                   
                   {/* Crypto Actions Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4 mt-8 md:mt-[100px]">
+                  <div className="flex flex-col sm:flex-row gap-4 mt-8 md:mt-16">
                     <div className="flex-1 flex justify-center">
-                      <a
-                        href="https://www.aquabeato.shop/pre-buy/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full max-w-[200px] h-12 py-3 px-6 rounded bg-[var(--color-accent1)] text-white font-semibold text-center hover:bg-white hover:text-[var(--color-accent1)] hover:border-[var(--color-accent1)] border transition-colors flex items-center justify-center"
+                      <Link
+                        href="/buy-token"
+                        className="w-full max-w-[200px] h-12 py-3 px-6 rounded-full bg-[var(--color-accent1)] text-white font-semibold text-center hover:bg-[color-mix(in_srgb,var(--color-accent1)_85%,black)] transition-colors flex items-center justify-center shadow-sm"
                       >
                         Buy Beato Coin
-                      </a>
+                      </Link>
                     </div>
                     <div className="flex-1 flex justify-center">
                       <Modal>
                         <ModalTrigger asChild>
-                          <button className="w-full max-w-[200px] h-12 py-3 px-6 rounded bg-[var(--color-accent2)] text-white font-semibold text-center hover:bg-white hover:text-[var(--color-accent2)] hover:border-[var(--color-accent2)] border transition-colors flex items-center justify-center text-xs">
+                          <button className="w-full max-w-[200px] h-12 py-3 px-6 rounded-full bg-white text-[var(--color-dark)] font-semibold text-center border border-gray-200 hover:bg-gray-50 hover:text-gray-900 transition-colors flex items-center justify-center shadow-sm">
                             About Beato Crypto
                           </button>
                         </ModalTrigger>
@@ -783,7 +789,7 @@ export default function WalletPage() {
                     <div className="flex-1 flex justify-center">
                       <SmartSwapCryptoButton 
                         size="lg" 
-                        className="w-full max-w-[200px] bg-[var(--color-accent1)] text-white hover:bg-white hover:text-[var(--color-accent1)] hover:border-[var(--color-accent1)] border transition-colors"
+                        className="w-full max-w-[200px] h-12 rounded-full bg-[var(--color-primary)] text-white hover:bg-[color-mix(in_srgb,var(--color-primary)_85%,black)] transition-colors shadow-sm"
                       >
                         Swap Crypto
                       </SmartSwapCryptoButton>
@@ -797,22 +803,22 @@ export default function WalletPage() {
 
         {/* Tabs: Only show if wallet is connected */}
         {connected && (
-          <div className="mt-8">
-            <div className="flex flex-col md:flex-row border-b border-gray-200 mb-4">
+          <div className="mt-12">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-8 border-b border-gray-200 mb-8">
               <button
-                className={`px-6 py-3 font-semibold text-md focus:outline-none transition border-b-2 ${activeTab === 'tokens' ? 'border-[#d8d8d8] text-[var(--color-primary)]' : 'border-transparent text-gray-500 hover:text-[var(--color-primary)]'}`}
+                className={`px-2 py-4 font-semibold text-[0.9375rem] focus:outline-none transition-colors border-b-2 -mb-px ${activeTab === 'tokens' ? 'border-[var(--color-primary)] text-[var(--color-primary)]' : 'border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300'}`}
                 onClick={() => setActiveTab('tokens')}
               >
                 My Tokens
               </button>
               <button
-                className={`px-6 py-3 font-semibold text-md focus:outline-none transition border-b-2 ${activeTab === 'transactions' ? 'border-[#d8d8d8] text-[var(--color-primary)]' : 'border-transparent text-gray-500 hover:text-[var(--color-primary)]'}`}
+                className={`px-2 py-4 font-semibold text-[0.9375rem] focus:outline-none transition-colors border-b-2 -mb-px ${activeTab === 'transactions' ? 'border-[var(--color-primary)] text-[var(--color-primary)]' : 'border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300'}`}
                 onClick={() => setActiveTab('transactions')}
               >
                 Transactions
               </button>
               <button
-                className={`px-6 py-3 font-semibold text-md focus:outline-none transition border-b-2 ${activeTab === 'redemptions' ? 'border-[#d8d8d8] text-[var(--color-primary)]' : 'border-transparent text-gray-500 hover:text-[var(--color-primary)]'}`}
+                className={`px-2 py-4 font-semibold text-[0.9375rem] focus:outline-none transition-colors border-b-2 -mb-px ${activeTab === 'redemptions' ? 'border-[var(--color-primary)] text-[var(--color-primary)]' : 'border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300'}`}
                 onClick={() => setActiveTab('redemptions')}
               >
                 Redemption Requests
@@ -820,39 +826,39 @@ export default function WalletPage() {
             </div>
             <div>
               {activeTab === 'tokens' && (
-                <div className="p-6 bg-white rounded shadow min-h-[200px]">
+                <div className="p-6 sm:p-8 bg-white rounded-2xl shadow-sm border border-gray-200/60 min-h-[200px]">
                   {/* Always show Beato Coin block */}
-                  <div className="flex flex-col md:flex-row items-center gap-4 p-4 border rounded-lg bg-gray-50 mb-4">
-                    <img src="/logo.png" alt="BEATO" className="w-12 h-12 rounded-full bg-white border" />
+                  <div className="flex flex-col md:flex-row items-center gap-4 p-5 border border-gray-100 rounded-xl bg-gray-50/50 mb-4 transition-colors hover:bg-gray-50">
+                    <img src="/logo.png" alt="BEATO" className="w-12 h-12 rounded-full bg-white border border-gray-200 shadow-sm object-contain p-1" />
                     <div className="flex-1 text-center md:text-left">
-                      <div className="font-semibold">Beato Coin <span className="text-xs text-gray-500">(BEATO)</span></div>
-                      <div className="text-sm text-gray-600">Balance: {beatoBalance}</div>
+                      <div className="font-semibold text-gray-900">Beato Coin <span className="text-xs text-gray-500 font-medium ml-1">(BEATO)</span></div>
+                      <div className="text-sm text-gray-500 mt-0.5">Balance: <span className="font-medium text-gray-700">{beatoBalance}</span></div>
                     </div>
-                    <div className="text-center md:text-right mt-2 md:mt-0">
-                      <div className="font-bold">{formatUSD(beatoValue)}</div>
-                      <div className="text-xs text-gray-500">{formatUSD(beatoValue)} / BEATO</div>
+                    <div className="text-center md:text-right mt-3 md:mt-0">
+                      <div className="font-bold text-lg text-gray-900">{formatUSD(beatoValue)}</div>
+                      <div className="text-xs text-gray-500 mt-0.5">{formatUSD(beatoValue)} / BEATO</div>
                     </div>
                   </div>
                   {isLoadingTokens ? (
-                    <div className="flex justify-center items-center h-32 text-gray-500">
-                      <Loader2 className="animate-spin h-6 w-6 mr-2" /> Loading tokens...
+                    <div className="flex justify-center items-center h-32 text-gray-400">
+                      <Loader2 className="animate-spin h-6 w-6 mr-2" /> <span className="text-sm font-medium">Loading tokens...</span>
                     </div>
                   ) : tokensError ? (
-                    <div className="text-red-500 text-center">{tokensError}</div>
+                    <div className="text-red-500 text-center text-sm font-medium">{tokensError}</div>
                   ) : tokens.length === 0 ? (
-                    <div className="text-gray-500 text-center">No Other Tokens Found</div>
+                    <div className="text-gray-400 text-center text-sm font-medium py-8">No Other Tokens Found</div>
                   ) : (
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       {tokens.map((token: any, idx: number) => (
-                        <div key={token.address || token.symbol || idx} className="flex items-center gap-4 p-4 border rounded-lg bg-gray-50">
-                          <img src={token.logo || '/default-token.png'} alt={token.symbol} className="w-8 h-8 rounded-full bg-white border" />
+                        <div key={token.address || token.symbol || idx} className="flex items-center gap-4 p-4 border border-gray-100 rounded-xl bg-white hover:bg-gray-50 transition-colors">
+                          <img src={token.logo || '/default-token.png'} alt={token.symbol} className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm" />
                           <div className="flex-1">
-                            <div className="font-semibold">{token.name} <span className="text-xs text-gray-500">({token.symbol})</span></div>
-                            <div className="text-sm text-gray-600">Balance: {token.balance}</div>
+                            <div className="font-semibold text-gray-900">{token.name} <span className="text-xs text-gray-500 font-medium ml-1">({token.symbol})</span></div>
+                            <div className="text-sm text-gray-500 mt-0.5">Balance: <span className="font-medium text-gray-700">{token.balance}</span></div>
                           </div>
                           <div className="text-right">
-                            <div className="font-bold">${token.value.toLocaleString(undefined, { maximumFractionDigits: 2 })}</div>
-                            <div className="text-xs text-gray-500">${token.price.toLocaleString(undefined, { maximumFractionDigits: 4 })} / {token.symbol}</div>
+                            <div className="font-bold text-gray-900">${token.value.toLocaleString(undefined, { maximumFractionDigits: 2 })}</div>
+                            <div className="text-xs text-gray-500 mt-0.5">${token.price.toLocaleString(undefined, { maximumFractionDigits: 4 })} / {token.symbol}</div>
                           </div>
                         </div>
                       ))}
@@ -861,7 +867,7 @@ export default function WalletPage() {
                 </div>
               )}
               {activeTab === 'transactions' && (
-                <div className="p-6 bg-white rounded shadow min-h-[200px]">
+                <div className="p-6 sm:p-8 bg-white rounded-2xl shadow-sm border border-gray-200/60 min-h-[200px]">
                   {/* Beato Coin Transactions Block */}
                   <div className="mb-8">
                     <h3 className="text-lg font-bold mb-2 text-center">Beato Coin Purchases</h3>
@@ -898,67 +904,80 @@ export default function WalletPage() {
                       </div>
                     )}
                   </div>
-                  {isLoadingTransactions ? (
-                    <div className="flex justify-center items-center h-32 text-gray-500">
-                      <Loader2 className="animate-spin h-6 w-6 mr-2" /> Loading transactions...
-                    </div>
-                  ) : transactionsError ? (
-                    <div className="text-red-500 text-center">{transactionsError}</div>
-                  ) : transactions.length === 0 ? (
-                    <div className="text-gray-500 text-center">No transactions found.</div>
-                  ) : (
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>From Address</TableHead>
-                          <TableHead>To Address</TableHead>
-                          <TableHead>Value</TableHead>
-                          <TableHead>Asset</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {transactions.map((tx: any) => (
-                          <TableRow key={tx.hash + (tx.uniqueId || '')}>
-                            <TableCell className="truncate max-w-[120px]">{tx.from}</TableCell>
-                            <TableCell className="truncate max-w-[120px]">{tx.to}</TableCell>
-                            <TableCell>{tx.value}</TableCell>
-                            <TableCell>{tx.asset}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  )}
+                  <div>
+                    <h3 className="text-xl font-bold mb-4 text-gray-900">Other Transactions</h3>
+                    {isLoadingTransactions ? (
+                      <div className="flex justify-center items-center h-20 text-gray-400">
+                        <Loader2 className="animate-spin h-6 w-6 mr-2" /> <span className="text-sm font-medium">Loading transactions...</span>
+                      </div>
+                    ) : transactionsError ? (
+                      <div className="text-red-500 text-sm font-medium">{transactionsError}</div>
+                    ) : transactions.length === 0 ? (
+                      <div className="text-gray-400 text-sm font-medium py-4">No transactions found.</div>
+                    ) : (
+                      <div className="overflow-x-auto rounded-xl border border-gray-100">
+                        <Table>
+                          <TableHeader className="bg-gray-50/50">
+                            <TableRow className="hover:bg-transparent border-gray-100">
+                              <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wider h-11">From Address</TableHead>
+                              <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wider h-11">To Address</TableHead>
+                              <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wider h-11">Value</TableHead>
+                              <TableHead className="text-xs font-semibold text-gray-500 uppercase tracking-wider h-11">Asset</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody className="divide-y divide-gray-50">
+                            {transactions.map((tx: any) => (
+                              <TableRow key={tx.hash + (tx.uniqueId || '')} className="hover:bg-gray-50/50 transition-colors border-gray-50">
+                                <TableCell className="truncate max-w-[120px] text-sm text-gray-600">{tx.from}</TableCell>
+                                <TableCell className="truncate max-w-[120px] text-sm text-gray-600">{tx.to}</TableCell>
+                                <TableCell className="text-sm font-medium text-gray-900">{tx.value}</TableCell>
+                                <TableCell className="text-sm text-gray-500">{tx.asset}</TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
               {activeTab === 'redemptions' && (
-                <div className="p-6 bg-white rounded shadow min-h-[200px]">
-                  <h3 className="text-lg font-bold mb-2 text-center">Redemption Requests</h3>
+                <div className="p-6 sm:p-8 bg-white rounded-2xl shadow-sm border border-gray-200/60 min-h-[200px]">
+                  <h3 className="text-xl font-bold mb-6 text-gray-900">Redemption Requests</h3>
                   {isLoadingRedemptions ? (
-                    <div className="flex justify-center items-center h-20 text-gray-500">
-                      <Loader2 className="animate-spin h-6 w-6 mr-2" /> Loading redemption requests...
+                    <div className="flex justify-center items-center h-20 text-gray-400">
+                      <Loader2 className="animate-spin h-6 w-6 mr-2" /> <span className="text-sm font-medium">Loading redemption requests...</span>
                     </div>
                   ) : redemptionsError ? (
-                    <div className="text-red-500 text-center">{redemptionsError}</div>
+                    <div className="text-red-500 text-sm font-medium">{redemptionsError}</div>
                   ) : redemptions.length === 0 ? (
-                    <div className="text-gray-500 text-center">No redemption requests found.</div>
+                    <div className="text-gray-400 text-sm font-medium py-4">No redemption requests found.</div>
                   ) : (
-                    <div className="overflow-x-auto">
-                      <table className="min-w-full border border-gray-200 bg-blue-50 rounded mb-4">
-                        <thead>
+                    <div className="overflow-x-auto rounded-xl border border-gray-100">
+                      <table className="min-w-full bg-white">
+                        <thead className="bg-gray-50/50">
                           <tr>
-                            <th className="px-4 py-2 border-b text-left text-sm font-medium text-gray-700">Tokens Redeemed</th>
-                            <th className="px-4 py-2 border-b text-left text-sm font-medium text-gray-700">Shipping Address</th>
-                            <th className="px-4 py-2 border-b text-left text-sm font-medium text-gray-700">Date</th>
-                            <th className="px-4 py-2 border-b text-left text-sm font-medium text-gray-700">Status</th>
+                            <th className="px-4 py-3 border-b border-gray-100 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Tokens Redeemed</th>
+                            <th className="px-4 py-3 border-b border-gray-100 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Shipping Address</th>
+                            <th className="px-4 py-3 border-b border-gray-100 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Date</th>
+                            <th className="px-4 py-3 border-b border-gray-100 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y divide-gray-50">
                           {redemptions.map((r: any, idx: number) => (
-                            <tr key={idx}>
-                              <td className="px-4 py-2 border-b">{r.tokens_redeemed}</td>
-                              <td className="px-4 py-2 border-b break-all">{r.shipping_address}</td>
-                              <td className="px-4 py-2 border-b">{r.created_at ? new Date(r.created_at).toLocaleString() : ''}</td>
-                              <td className="px-4 py-2 border-b capitalize">{r.status ? r.status.charAt(0).toUpperCase() + r.status.slice(1) : ''}</td>
+                            <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
+                              <td className="px-4 py-3 text-sm font-medium text-gray-900">{r.tokens_redeemed}</td>
+                              <td className="px-4 py-3 text-sm text-gray-600 break-all">{r.shipping_address}</td>
+                              <td className="px-4 py-3 text-sm text-gray-500">{r.created_at ? new Date(r.created_at).toLocaleString() : ''}</td>
+                              <td className="px-4 py-3 text-sm text-gray-600 capitalize">
+                                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                                  r.status === 'completed' ? 'bg-green-100 text-green-800' :
+                                  r.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                                  'bg-gray-100 text-gray-800'
+                                }`}>
+                                  {r.status ? r.status.charAt(0).toUpperCase() + r.status.slice(1) : ''}
+                                </span>
+                              </td>
                             </tr>
                           ))}
                         </tbody>
@@ -973,11 +992,11 @@ export default function WalletPage() {
 
         {/* Disconnect Button for Beato Wallet */}
         {beatoWallet.isConnected && (
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-12">
             <button
               type="button"
               onClick={beatoWallet.disconnect}
-              className="px-[50px] py-3 rounded font-medium bg-[var(--color-accent2)] text-white hover:bg-[var(--color-accent1)] transition"
+              className="px-8 py-3 rounded-full font-semibold bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors shadow-sm"
             >
               Disconnect Wallet
             </button>

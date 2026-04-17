@@ -6,6 +6,7 @@ import { createClient } from "@/utils/supabase/client";
 import { useTheme } from "../contexts/ThemeContext";
 import { MobileMenu } from "@/components/mobile-menu";
 import { CustomNavButtons } from "@/components/custom-nav-buttons";
+import { useMainNavMenu } from "@/hooks/use-main-nav-menu";
 import Loading from "@/components/ui/loading";
 import { getSiteName, DEFAULT_SITE_NAME, subscribeToSiteNameChanges } from "@/utils/site-name";
 import { AuthChangeEvent, Session } from '@supabase/supabase-js'
@@ -16,6 +17,7 @@ export function CustomHeader() {
   const [session, setSession] = useState<boolean>(false);
   const supabase = createClient();
   const { colors } = useTheme();
+  const { menuItems } = useMainNavMenu();
 
   useEffect(() => {
     const loadSiteName = async () => {
@@ -64,7 +66,7 @@ export function CustomHeader() {
           <CustomNavButtons />
           {/* Show MobileMenu for all users on mobile, with different links for logged in/out */}
           <div className="md:hidden flex items-center">
-            <MobileMenu />
+            <MobileMenu navItems={menuItems} />
           </div>
         </div>
       </div>

@@ -99,10 +99,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       root.style.setProperty(`--color-${key}`, value)
     })
 
-    // Apply header and page background colors directly
-    const header = document.querySelector('header')
+    // Header: translucent wash so backdrop-blur and border from the component stay visible
+    const header = document.querySelector("header")
     if (header) {
-      header.style.backgroundColor = colors.header
+      header.style.backgroundColor = `color-mix(in srgb, ${colors.header} 86%, transparent)`
     }
     document.body.style.backgroundColor = colors.pageBackground
   }, [colors])

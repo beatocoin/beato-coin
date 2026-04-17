@@ -47,12 +47,36 @@ async function encryptPrivateKey(privateKey: string, pin: string) {
   };
 }
 
-interface EVMWalletCreateButtonProps {
-  className?: string;
-  showConnectBeatoButton?: boolean;
+export function ConnectBeatoWalletButton({ className = '' }: { className?: string }) {
+  const [showConnectModal, setShowConnectModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      setIsLoggedIn(!!user);
+    };
+    checkUser();
+  }, []);
+
+  if (!isLoggedIn) return null;
+
+  return (
+    <>
+      <button
+        type="button"
+        className={`h-11 whitespace-nowrap overflow-hidden text-ellipsis font-medium text-md flex items-center justify-center text-center border border-gray-300 bg-white text-gray-900 hover:bg-gray-100 ${className}`}
+        onClick={() => setShowConnectModal(true)}
+      >
+        Connect Beato Wallet
+      </button>
+      <ConnectBeatoWalletModal open={showConnectModal} onClose={() => setShowConnectModal(false)} />
+    </>
+  );
 }
 
-export default function EVMWalletCreateButton({ className = '', showConnectBeatoButton = false }: EVMWalletCreateButtonProps) {
+export default function EVMWalletCreateButton({ className = '' }: { className?: string }) {
   const [showModal, setShowModal] = useState(false);
   const [pin, setPin] = useState('');
   const [pinConfirm, setPinConfirm] = useState('');
@@ -61,7 +85,6 @@ export default function EVMWalletCreateButton({ className = '', showConnectBeato
   const [success, setSuccess] = useState(false);
   const { isConnected: beatoConnected, connect: connectBeatoWallet } = useBeatoWalletStore();
   const { providerType } = useWalletProvider();
-  const [showConnectModal, setShowConnectModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Determine if any wallet is connected (AppKit, Moralis, or Beato)
@@ -157,18 +180,6 @@ export default function EVMWalletCreateButton({ className = '', showConnectBeato
       >
         Create Beato Wallet
       </button>
-      {showConnectBeatoButton && (
-        <>
-          <button
-            type="button"
-            className="w-full h-11 whitespace-nowrap overflow-hidden text-ellipsis font-medium text-md flex items-center justify-center text-center border border-gray-300 bg-white text-gray-900 hover:bg-gray-100"
-            onClick={() => setShowConnectModal(true)}
-          >
-            Connect Beato Wallet
-          </button>
-          <ConnectBeatoWalletModal open={showConnectModal} onClose={() => setShowConnectModal(false)} />
-        </>
-      )}
       {success && (
         <div className="mt-3 w-full text-center">
           <div className="text-green-700 font-bold text-lg bg-green-100 border border-green-300 rounded px-4 py-3 shadow-md animate-fade-in">
