@@ -100,144 +100,113 @@ export default function Home() {
   return (
     <main className="w-full">
       {/* Hero Section */}
-      <section className="relative border-b w-full" style={{ borderColor: colors.secondary, zIndex: 10 }}>
-        {/* Image Background */}
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            backgroundImage: `url('/banner.png')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        >
-          {/* Dark overlay */}
-          <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.85)' }} />
-          {/* Fallback gradient overlay */}
-          <div 
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: `linear-gradient(180deg, ${colors.dark}CC 0%, ${colors.accent1}80 60%, ${colors.accent2}80 100%)`,
-              opacity: 0.8
-            }}
-          />
-        </div>
+      <section className="relative w-full bg-white overflow-hidden">
+        {/* Subtle background gradient */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-50/50 via-white to-white pointer-events-none" />
         
-        {/* Content */}
-        <div
-          className="relative z-10 w-full px-4"
-          style={{
-            paddingTop: '5rem',
-            paddingBottom: '5rem',
-            boxSizing: 'border-box',
-          }}
-        >
-          <h1
-            className="text-[1.4rem] leading-[1.75rem] md:text-[3rem] lg:text-[3rem] md:leading-[3.75rem] font-bold mb-8 text-center"
-            style={{
-              background: `linear-gradient(90deg, ${colors.primary}, ${colors.accent1}, ${colors.accent2})`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              color: 'transparent',
-            }}
-          >
-            <style>{`
-              @media (max-width: 767px) {
-                .hero-h1-overwrite { line-height: 2rem !important; }
-                .hero-p-overwrite { font-size: 1.05rem !important; line-height: 1.5rem !important; }
-              }
-            `}</style>
-            <span className="hero-h1-overwrite">Beato Coin: The Future of Water Security</span>
-          </h1>
-          
-          {/* Coin Image */}
-          <div className="flex justify-center mb-8">
-            <div 
-              className="rounded-lg shadow-2xl"
-              style={{ 
-                padding: '25px',
-                background: `linear-gradient(135deg, ${colors.accent1}, ${colors.accent2})`,
-                display: 'inline-block',
-                boxShadow: `0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)`,
-                transform: 'perspective(1000px) rotateX(5deg)',
-                transition: 'all 0.3s ease'
-              }}
-            >
-              <Image
-                src="/coin-square.png"
-                alt="Beato Coin"
-                width={300}
-                height={300}
-                className="rounded-lg shadow-lg max-w-[300px]"
-                style={{ border: `3px solid ${colors.primary}` }}
-              />
-            </div>
-          </div>
-          
-          <p className="text-[1.1rem] leading-[1.6rem] md:text-xl mb-12 text-center hero-p-overwrite mx-auto" style={{ color: 'white', maxWidth: '1000px' }}>
-            The Beato Coin Token merges physical and digital assets by tokenizing your water supply. Each Beato Coin represents a case of water that you can redeem at a later date. Secure your future water needs and peace of mind knowing that your water inventory is ready and available when you need it most.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/auth?tab=register" className="w-[300px]">
-              <button className="w-full px-[50px] py-3 text-white font-semibold rounded-lg transition-colors"
-                style={{ backgroundColor: colors.accent2 }}>
-                Create Account
-              </button>
-            </Link>
-            <Link href="/buy-token" className="w-[300px]">
-              <button className="w-full px-[50px] py-3 text-white font-semibold rounded-lg transition-colors"
-                style={{ backgroundColor: colors.accent1 }}>
-                Buy $BEATO
-              </button>
-            </Link>
-            <Modal>
-              <ModalTrigger asChild>
-                <button
-                  className="w-[300px] px-[50px] py-3 text-white font-semibold rounded-lg transition-colors"
-                  style={{ backgroundColor: colors.accent2 }}
-                >
-                  About Beato Crypto
-                </button>
-              </ModalTrigger>
-              <ModalContent
-                style={{
-                  width: '750px',
-                  maxWidth: '95vw',
-                  padding: '0',
-                  borderRadius: '16px',
-                  background: '#fff',
-                }}
-              >
-                <div
-                  style={{
-                    padding: '25px',
-                    maxWidth: '95vw',
-                  }}
-                  className="sm:p-[25px] p-[10px] flex flex-col items-center justify-center"
-                >
-                  <ModalHeader>
-                    <ModalTitle>About Beato Crypto</ModalTitle>
-                  </ModalHeader>
-                  <video
-                    src="/aqua-beato-coin-overview.mp4"
-                    controls
+        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-32">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+            
+            {/* Left Column: Text & CTAs */}
+            <div className="max-w-2xl text-center lg:text-left mx-auto lg:mx-0">
+              <h1 className="text-[2.5rem] sm:text-5xl lg:text-[4rem] font-extrabold tracking-tight text-gray-900 leading-[1.1] mb-6">
+                The Future of <br className="hidden sm:block" />
+                <span style={{ color: colors.primary }}>Water Security</span>
+              </h1>
+              
+              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0">
+                The Beato Coin Token merges physical and digital assets by tokenizing your water supply. Each Beato Coin represents a case of water that you can redeem at a later date. Secure your future water needs today.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4">
+                <Link href="/buy-token" className="w-full sm:w-auto">
+                  <button 
+                    className="w-full sm:w-auto px-8 py-4 text-white font-semibold rounded-full transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-[1.05rem]"
+                    style={{ backgroundColor: colors.accent1 }}
+                  >
+                    Buy $BEATO
+                  </button>
+                </Link>
+                <Link href="/auth?tab=register" className="w-full sm:w-auto">
+                  <button 
+                    className="w-full sm:w-auto px-8 py-4 bg-white text-gray-900 font-semibold rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all shadow-sm text-[1.05rem]"
+                  >
+                    Create Account
+                  </button>
+                </Link>
+                <Modal>
+                  <ModalTrigger asChild>
+                    <button 
+                      className="w-full sm:w-auto px-8 py-4 bg-white text-gray-900 font-semibold rounded-full border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all shadow-sm text-[1.05rem] flex items-center justify-center gap-2"
+                    >
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      Watch Video
+                    </button>
+                  </ModalTrigger>
+                  <ModalContent
                     style={{
-                      width: '100%',
-                      maxWidth: '650px',
-                      height: '400px',
-                      borderRadius: '12px',
-                      background: '#000',
-                      margin: '0 auto',
-                      display: 'block',
+                      width: '750px',
+                      maxWidth: '95vw',
+                      padding: '0',
+                      borderRadius: '16px',
+                      background: '#fff',
                     }}
-                  />
-                </div>
-                <ModalClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
-                  <span className="sr-only">Close</span>
-                </ModalClose>
-              </ModalContent>
-            </Modal>
+                  >
+                    <div
+                      style={{
+                        padding: '25px',
+                        maxWidth: '95vw',
+                      }}
+                      className="sm:p-[25px] p-[10px] flex flex-col items-center justify-center"
+                    >
+                      <ModalHeader>
+                        <ModalTitle>About Beato Crypto</ModalTitle>
+                      </ModalHeader>
+                      <video
+                        src="/aqua-beato-coin-overview.mp4"
+                        controls
+                        style={{
+                          width: '100%',
+                          maxWidth: '650px',
+                          height: '400px',
+                          borderRadius: '12px',
+                          background: '#000',
+                          margin: '0 auto',
+                          display: 'block',
+                        }}
+                      />
+                    </div>
+                    <ModalClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                      <span className="sr-only">Close</span>
+                    </ModalClose>
+                  </ModalContent>
+                </Modal>
+              </div>
+            </div>
+
+            {/* Right Column: Image/Graphic */}
+            <div className="relative lg:ml-auto flex justify-center lg:justify-end mt-8 lg:mt-0">
+              {/* Decorative background blob */}
+              <div 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] opacity-10 blur-3xl rounded-full pointer-events-none"
+                style={{ background: `linear-gradient(to top right, ${colors.accent1}, ${colors.accent2})` }}
+              />
+              
+              <div className="relative z-10 animate-[float_6s_ease-in-out_infinite]">
+                <Image
+                  src="/coin-square.png"
+                  alt="Beato Coin"
+                  width={480}
+                  height={480}
+                  className="w-full max-w-[280px] sm:max-w-[360px] lg:max-w-[480px] object-cover drop-shadow-2xl"
+                  priority
+                />
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
