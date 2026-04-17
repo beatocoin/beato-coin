@@ -66,7 +66,9 @@ export function useMainNavMenu() {
   const menuItems = useMemo<MainNavItem[]>(
     () => [
       { href: "/", title: "Home", icon: Home },
-      { href: "/wallet", title: "Wallet", icon: Wallet },
+      ...(!isLoggedIn
+        ? [{ href: "/wallet", title: "Wallet", icon: Wallet }]
+        : []),
       { href: "/buy-token", title: "Buy Beato Coin", icon: ShoppingCart },
       ...(isLoggedIn
         ? [{ href: "/redeem-token", title: "Redeem Beato Coin", icon: ShoppingCart }]
